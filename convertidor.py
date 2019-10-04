@@ -8,14 +8,12 @@ Matriz_Datos = pd.read_csv (r'Datos/SNP_version.csv')
 Matriz_Datos = Matriz_Datos.set_index("SNP Name")
 nombres = list(Matriz_Datos.index) 
 
-Matriz_Datos_Con = pd.DataFrame(index=range(0,Matriz_Datos.shape[0]*2), columns = Matriz_Datos.columns[1:])
-
+Matriz_Datos_Con = pd.DataFrame(index=range(0,Matriz_Datos.shape[0]*2), columns = Matriz_Datos.columns[:])
+print (Matriz_Datos_Con)
 pos = 0
 for casos in nombres:
 	print(pos)
-	for j in range (0,12):
-	#for j in range (0,Matriz_Datos.shape[1]-1):
-		#print(Matriz_Datos.loc[casos][j])
+	for j in range (0,Matriz_Datos.shape[1]):
 		Conversion = Conver_Mat[Matriz_Datos.loc[casos][j]]
 		Matriz_Datos_Con.loc[pos][j] = Conversion[0]
 		Matriz_Datos_Con.loc[pos+1][j] = Conversion[1]
@@ -23,6 +21,7 @@ for casos in nombres:
 	
 Matriz_Datos_Con.to_excel("Resultados/Converted.xlsx")
 Matriz_Datos_Con.to_csv("Resultados/Converted.csv")
+
 print(Matriz_Datos_Con)
 
 
